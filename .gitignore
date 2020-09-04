@@ -1,0 +1,12 @@
+*.pyc
+
+.env
+.ipynb_checkpoints
+
+__pycache__/
+
+.vscode/
+
+app.db
+
+*.csv
