@@ -8,6 +8,7 @@ authors = ["jonny <jonny@insurami.com>"]
 python = "^3.6.9"
 pandas = "^1.1.1"
 requests = "^2.24.0"
+gutenbergpy = "^0.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

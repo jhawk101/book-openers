@@ -1,9 +1,9 @@
-from book_openers.gutenberg import Gutenberg
+from book_openers.gutenberg import Book
 import pytest
 
 
 def test_alice():
-    alice = Gutenberg("book_openers/txt_files/alice.txt")
+    alice = Book("book_openers/txt_files/alice.txt")
     assert alice.title == "Alice’s Adventures in Wonderland"
     assert alice.author == "Lewis Carroll"
     assert alice._chapter_ones == [38, 54]
@@ -19,7 +19,7 @@ def test_alice():
 
 @pytest.mark.skip(reason="slow to call url every time")
 def test_count():
-    count = Gutenberg(
+    count = Book(
         "http://aleph.gutenberg.org/1/1/8/1184/1184-0.txt", init_from="url"
     )
     assert count.title == "The Count of Monte Cristo"

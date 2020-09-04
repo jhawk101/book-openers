@@ -7,6 +7,6 @@ __pycache__/
 
 .vscode/
 
-app.db
-
 *.csv
+
+texts/
