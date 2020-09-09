@@ -111,10 +111,9 @@ pymongo = ">=2.9,<3.0"
 setuptools = ">=18.5"
 
 [package.source]
-reference = "538b49f49a3e4d29d9005e17c7e126a0d3135afb"
+reference = "ae20c9d90add7f1e5c48e87ebbf6376a3a8a808d"
 type = "git"
 url = "https://github.com/jhawk101/gutenbergpy.git"
-
 [[package]]
 category = "main"
 description = "Internationalized Domain Names in Applications (IDNA)"

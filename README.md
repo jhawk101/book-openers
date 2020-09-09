@@ -20,11 +20,15 @@ The texts are prepended with a lot of irrelevant detail such as licencing before
 
 ## Packages
 
-Used [gutenbergpy](https://github.com/raduangelescu/gutenbergpy) as a wrapper to query the database. It hasn't been updated for python 3 so had to edit `textget.py` imports in my virtualenv:
+Used [gutenbergpy](https://github.com/raduangelescu/gutenbergpy) as a wrapper to query the database. It hasn't been updated for python 3 so I made [my own branch](https://github.com/jhawk101/gutenbergpy.git). In fact found it was easier to use the package just to generate urls and collect the catalogue into a sql db.
 
-``` python
-import http.client as httplib
-..
-from urllib.request import urlopen
-from urllib.parse import urlparse
+## Catalogue Database
+
+`gutenbergbookid` in the database is the book index to use in querying the aleph mirror.
+
+``` sql
+select *
+from books b
+left join titles t on b.id = t.bookid
+where gutenbergbookid = 2701
 ```
