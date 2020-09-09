@@ -1,4 +1,4 @@
-from book_openers.gutenberg import Book
+from book_openers.book import Book
 import pytest
 
 

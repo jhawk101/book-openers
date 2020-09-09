@@ -6,9 +6,13 @@ class Book:
     def __init__(self, source, source_type="txt"):
         self.source = source
         if source_type == "txt":
+            self.init_from_txt(self.source)
+        elif source_type == "file":
             self.init_from_text_file(self.source)
-        else:
+        elif source_type == "url":
             self.init_from_url(self.source)
+        else:
+            raise ValueError("source_type options: [txt, file, url]")
 
     def init_from_text_file(self, filepath):
         with open(filepath) as f:
@@ -17,6 +21,11 @@ class Book:
     def init_from_url(self, url):
         r = requests.get(url)
         text = r.text
+        text = text.replace("\r", "")
+        self.lines_of_text = text.split("\n")
+
+    def init_from_txt(self, txt):
+        text = txt
         text = text.replace("\r", "")
         self.lines_of_text = text.split("\n")
 
@@ -69,6 +78,26 @@ class Book:
             else:
                 return output
 
+    @property
+    def _bare_chapter_title_row(self):
+        """
+        To find a row in the case that the chapter is titled without 'Chapter 1'
+        eg.
+        Tale of Two Cities http://aleph.gutenberg.org/9/98/98-0.txt
+        line 110: 'I. The Period'
+
+        returns: row number (int)
+        """
+        if not self._chapter_one_title:
+            return None
+
+        start_line = self._chapter_ones[0]
+        for number, line in enumerate(self.lines_of_text[start_line + 1 :]):
+            if self._chapter_one_title in line:
+                return start_line + 1 + number
+
+        return None
+
     def _sentence_after_chapter(self, row):
         sentence = []
         for line in self.lines_of_text[row + 1 :]:
@@ -93,7 +122,12 @@ class Book:
     @property
     def first_line(self):
         options = []
-        for row in self._chapter_ones:
+        _chapter_ones = self._chapter_ones
+
+        if self._bare_chapter_title_row:
+            _chapter_ones.append(self._bare_chapter_title_row)
+
+        for row in _chapter_ones:
             sentence = self._sentence_after_chapter(row)
             if sentence:
                 clean = sentence.replace("\n", " ")
@@ -102,4 +136,7 @@ class Book:
                 final = self._remove_title_from_first_line(cleanest)
                 options.append(final)
 
-        return options[0]
+        if options:
+            return options[0]
+        else:
+            return ""

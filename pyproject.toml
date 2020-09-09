@@ -2,13 +2,14 @@
 name = "book-openers"
 version = "0.1.0"
 description = ""
-authors = ["jonny <jonny@insurami.com>"]
+authors = ["jonny <jonny.hawkins@outlook.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.6.9"
 pandas = "^1.1.1"
 requests = "^2.24.0"
-gutenbergpy = "^0.2.0"
+gutenbergpy = { git = "https://github.com/jhawk101/gutenbergpy.git" }
+black = "^20.8b1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
