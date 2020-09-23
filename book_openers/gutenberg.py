@@ -1,5 +1,8 @@
 import gutenbergpy.textget as tget
 from book_openers.book import Book
+import sqlite3
+import aiosql
+
 
 """
 NOTES
@@ -28,17 +31,23 @@ NOTES
 EXAMPLE_IDS = [
     # 43,
     # 2147,
-    98,
+    # 98,
     # 1184,
     # 215,
     # 2542,
     # 1952,
+    17355
 ]
 
 
 def main():
-    for book_id in EXAMPLE_IDS:
-        url = tget._format_download_uri(book_id)
+    conn = sqlite3.connect("gutenbergindex.db")
+    queries = aiosql.from_path("book_openers/queries.sql", "sqlite3")
+
+    books = queries.get_books(conn)
+
+    for book in books[:10]:
+        url = tget._format_download_uri(book[0])
         book = Book(url, source_type="url")
         print(book.title)
         print(book.author)

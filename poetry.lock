@@ -1,5 +1,16 @@
 [[package]]
 category = "main"
+description = "Simple SQL in Python."
+name = "aiosql"
+optional = false
+python-versions = ">=3.6,<4.0"
+version = "3.1.2"
+
+[package.dependencies]
+typing_extensions = ">=3.7.4,<4.0.0"
+
+[[package]]
+category = "main"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 name = "appdirs"
 optional = false
@@ -114,6 +125,7 @@ setuptools = ">=18.5"
 reference = "ae20c9d90add7f1e5c48e87ebbf6376a3a8a808d"
 type = "git"
 url = "https://github.com/jhawk101/gutenbergpy.git"
+
 [[package]]
 category = "main"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -390,10 +402,14 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "5c685ff789745bd39a2ec2e50e3c528db807673368972cf91903ea8e5814177e"
+content-hash = "bc017c217d91ff1354a8f88bec3b0dce9542ebfac736914d3d927c802b705704"
 python-versions = "^3.6.9"
 
 [metadata.files]
+aiosql = [
+    {file = "aiosql-3.1.2-py3-none-any.whl", hash = "sha256:d8b804008981f6cf4170906c10146151fba08fc1a6dbc6c1cb5e52415d38687c"},
+    {file = "aiosql-3.1.2.tar.gz", hash = "sha256:565ea71a280df7f1af76ee604ef99991c6c55142b3a44c2e6887884836844cf3"},
+]
 appdirs = [
     {file = "appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"},
     {file = "appdirs-1.4.4.tar.gz", hash = "sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41"},
