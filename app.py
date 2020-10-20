@@ -9,4 +9,9 @@ if __name__ == "__main__":
     elif argv[1] == "catalogue":
         GutenbergCache.create()
     else:
-        print("invalid options")
+        try:
+            id = int(argv[1])
+        except:
+            print("invalid options")
+        else:
+            main(id)

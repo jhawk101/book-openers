@@ -40,14 +40,20 @@ EXAMPLE_IDS = [
 ]
 
 
-def main():
-    conn = sqlite3.connect("gutenbergindex.db")
-    queries = aiosql.from_path("book_openers/queries.sql", "sqlite3")
+def main(id=None):
+    
+    if id:
+        books = [id]
+    
+    else:
+        conn = sqlite3.connect("gutenbergindex.db")
+        queries = aiosql.from_path("book_openers/queries.sql", "sqlite3")
 
-    books = queries.get_books(conn)
+        books = queries.get_books(conn)
+        books = [book[0] for book in books[:10]]
 
-    for book in books[:10]:
-        url = tget._format_download_uri(book[0])
+    for book in books:
+        url = tget._format_download_uri(book)
         book = Book(url, source_type="url")
         print(book.title)
         print(book.author)

@@ -59,6 +59,8 @@ class Book:
         for number, line in enumerate(self.lines_of_text):
             if re.match(r"\s*(chapter [I1](?![IVX\d]))", line, flags=re.I):
                 rows.append(number)
+            elif re.match(r"\s*([I1](?![IVX\d]))", line, flags=re.I):
+                rows.append(number)
         return rows
 
     @property
@@ -133,8 +135,9 @@ class Book:
                 clean = sentence.replace("\n", " ")
                 cleaner = re.search(r" ?(.*)[\.\?!]", clean)[0]
                 cleanest = " ".join(cleaner.split())
-                final = self._remove_title_from_first_line(cleanest)
-                options.append(final)
+                if self._chapter_one_title:
+                    cleanest = self._remove_title_from_first_line(cleanest)
+                options.append(cleanest)
 
         if options:
             return options[0]
